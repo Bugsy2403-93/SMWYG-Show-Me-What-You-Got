@@ -1,0 +1,44 @@
+groups:
+  - name: otelcol-exporter
+    rules:
+      - alert: CollectorQueueNearlyFull
+        expr: |
+          otelcol_exporter_queue_size
+          / clamp_min(otelcol_exporter_queue_capacity, 1) > 0.8
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: Collector exporter queue >80% capacity
+
+      - alert: CollectorEnqueueFailures
+        expr: increase(otelcol_exporter_enqueue_failed_spans[5m]) > 0
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: Collector enqueue failures increasing
+
+      - alert: CollectorExportFailures
+        expr: increase(otelcol_exporter_send_failed_spans[5m]) > 0
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: Collector export send failures increasing
+
+      - alert: CollectorReceiverRefusals
+        expr: increase(otelcol_receiver_refused_spans[5m]) > 0
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: Collector receivers refusing spans
+
+      - alert: CollectorDown
+        expr: up{job="otel-collector"} == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: Prometheus cannot scrape the Collector

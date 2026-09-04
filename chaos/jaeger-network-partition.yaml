@@ -1,0 +1,25 @@
+# Bounded Collector → Jaeger partition for Chaos Mesh.
+# Adjust namespace, labels, and duration to match your chart.
+apiVersion: chaos-mesh.org/v1alpha1
+kind: NetworkChaos
+metadata:
+  name: collector-to-jaeger-partition
+  namespace: observability
+spec:
+  action: partition
+  mode: all
+  duration: "5m"
+  selector:
+    namespaces:
+      - observability
+    labelSelectors:
+      app.kubernetes.io/name: otel-collector
+  direction: to
+  target:
+    mode: all
+    selector:
+      namespaces:
+        - observability
+      labelSelectors:
+        # Jaeger all-in-one / collector — change if your labels differ
+        app.kubernetes.io/name: jaeger

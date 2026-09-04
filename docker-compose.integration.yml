@@ -1,0 +1,16 @@
+services:
+  agent:
+    environment:
+      OPENAI_API_KEY: test-key
+      OTEL_ENABLED: "true"
+      OTEL_EXPORTER_OTLP_TRACES_ENDPOINT: http://otel-collector:4318/v1/traces
+    command: ["Generate an integration-test evidence note."]
+
+  otel-collector:
+    image: otel/opentelemetry-collector-contrib:0.120.0
+
+  jaeger:
+    image: jaegertracing/all-in-one:latest
+
+  prometheus:
+    image: prom/prometheus:latest

@@ -1,0 +1,18 @@
+services:
+  toxiproxy:
+    image: ghcr.io/shopify/toxiproxy:2.9.0
+    ports:
+      - "8474:8474"
+      - "14318:14318"
+    depends_on:
+      - jaeger
+    restart: unless-stopped
+
+  otel-collector:
+    volumes:
+      - ./otel-collector-chaos.yaml:/etc/otelcol/otel-collector.yaml:ro
+    depends_on:
+      jaeger:
+        condition: service_started
+      toxiproxy:
+        condition: service_started

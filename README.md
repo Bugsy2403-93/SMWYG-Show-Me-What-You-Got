@@ -48,3 +48,10 @@ Any suggestions or ideas for this tool are welcome - just tweet me on [@ManiarVi
 # Credit
 A big thanks to https://gotcha.pw/
 
+## Observability chaos testing
+
+See [Collector → Jaeger network partition](docs/chaos-collector-jaeger-partition.md) for Toxiproxy / Chaos Mesh procedures, and [batch processor notes](docs/otel-batch-processor-notes.md).
+
+See also [Docker deployment](docs/docker-deployment.md).
+
+See also [Compose integration testing](docs/docker-compose-integration.md).

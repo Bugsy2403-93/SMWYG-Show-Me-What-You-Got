@@ -1,0 +1,36 @@
+receivers:
+  otlp:
+    protocols:
+      grpc:
+        endpoint: 0.0.0.0:4317
+      http:
+        endpoint: 0.0.0.0:4318
+
+processors:
+  memory_limiter:
+    check_interval: 1s
+    limit_mib: 400
+    spike_limit_mib: 100
+  batch:
+    send_batch_size: 1024
+    send_batch_max_size: 2048
+    timeout: 200ms
+
+exporters:
+  # Path A: export through Toxiproxy listen port (see docker-compose.chaos.yml)
+  otlphttp/jaeger:
+    endpoint: http://toxiproxy:14318
+    tls:
+      insecure: true
+  debug:
+    verbosity: basic
+
+service:
+  telemetry:
+    metrics:
+      address: 0.0.0.0:8888
+  pipelines:
+    traces:
+      receivers: [otlp]
+      processors: [memory_limiter, batch]
+      exporters: [otlphttp/jaeger, debug]

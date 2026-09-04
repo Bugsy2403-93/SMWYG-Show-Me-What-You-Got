@@ -53,3 +53,5 @@ A big thanks to https://gotcha.pw/
 See [Collector → Jaeger network partition](docs/chaos-collector-jaeger-partition.md) for Toxiproxy / Chaos Mesh procedures, and [batch processor notes](docs/otel-batch-processor-notes.md).
 
 See also [Docker deployment](docs/docker-deployment.md).
+
+See also [Compose integration testing](docs/docker-compose-integration.md).

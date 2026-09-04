@@ -1,0 +1,6 @@
+apiVersion: v2
+name: investigator-agent
+description: Secure agent workflow with mounted secrets, health probes, and telemetry
+type: application
+version: 0.1.0
+appVersion: "1.0.0"

@@ -1,0 +1,13 @@
+# replacements.txt.template
+# Use this file as input to git-filter-repo --replace-text or BFG --replace-text.
+# Format: one replacement per line in the format:
+# OLD_SECRET==>REDACTED_SECRET
+#
+# Notes:
+# - Replace the literal OLD_SECRET exactly (no regex). The RHS is the replacement text.
+# - Do NOT put actual live secrets here if you plan to share the file publicly. Use REDACTED_* placeholders.
+# - Example:
+#   MY_OLD_API_KEY==>REDACTED_API_KEY
+#
+# Add one entry per secret to remove/replace.
+# After preparing replacements.txt, follow the commands in the README or run the supplied helper script.
